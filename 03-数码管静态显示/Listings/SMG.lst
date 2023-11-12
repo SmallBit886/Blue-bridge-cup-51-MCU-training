@@ -1,0 +1,109 @@
+C51 COMPILER V9.54   SMG                                                                   11/12/2023 09:37:27 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE SMG
+OBJECT MODULE PLACED IN .\Objects\SMG.obj
+COMPILER INVOKED BY: D:\KEIL5\keil5.1\C51\BIN\C51.EXE SMG.c OPTIMIZE(8,SPEED) BROWSE INCDIR(..\2.继电器与蜂鸣器) DEBUG O
+                    -BJECTEXTEND PRINT(.\Listings\SMG.lst) OBJECT(.\Objects\SMG.obj)
+
+line level    source
+
+   1          #include "SMG.h"
+   2          /**************************0---9 a---h*********************************/
+   3          unsigned char code daunma[18]={0xc0,0xf9,0xa4,0xb0,0x99,0x92,0x82,0xf8,0x80,0x90,
+   4                                                                   0x88,0x80,0xc6,0xc0,0x86,0x8e,0xbf,0x7f};
+   5          void SMG_Init(void)
+   6          {
+   7   1              Init_HC138(7);//Y7导通
+   8   1              Init_HC138(6);//Y6导通
+   9   1              
+  10   1      }
+  11          void SMG_Show(unsigned char pos ,unsigned char date)
+  12          {
+  13   1              Init_HC138(6);//Y6导通
+  14   1              P0=0x01<<pos;
+  15   1              Init_HC138(7);//Y7导通
+  16   1              P0=date;
+  17   1      }
+  18          /***************************8 个数码管从左至右， 逐个数码管依次显示“0” 到“9” 的 10 个数字*************
+             -*******************/
+  19          void show1(void)
+  20          {
+  21   1              unsigned char i,j;
+  22   1              for(i=0;i<8;i++)
+  23   1              {
+  24   2                      for(j=0;j<10;j++)
+  25   2                      {
+  26   3                              SMG_Show(i,daunma[j]);
+  27   3                              Delay(500);
+  28   3                      }
+  29   2              }
+  30   1      }
+  31          /****************************8 个数码管同时显示“0” 到“9” 的 10 个数字和“A” 到“F” 的 6 个字母******
+             -*************************/
+  32          void show2(void)
+  33          {
+  34   1              unsigned char j;
+  35   1              
+  36   1              for(j=0;j<16;j++)
+  37   1              {
+  38   2                      P0=0xff;
+  39   2                      Delay(2);
+  40   2                      P0=daunma[j];
+  41   2                      Delay(500);
+  42   2              }
+  43   1      
+  44   1      }
+  45          
+  46          /****************************数码管的动态显示*******************************/
+  47          unsigned char yu;
+  48          void display_show()
+  49          {
+  50   1              SMG_Show(0,daunma[2]);
+  51   1              Delay(2);
+  52   1              SMG_Show(1,daunma[0]);
+C51 COMPILER V9.54   SMG                                                                   11/12/2023 09:37:27 PAGE 2   
+
+  53   1              Delay(2);
+  54   1              SMG_Show(2,daunma[2]);
+  55   1              Delay(2); 
+  56   1              SMG_Show(3,daunma[3]);
+  57   1              Delay(2); 
+  58   1              SMG_Show(4,daunma[16]);
+  59   1              Delay(2); 
+  60   1              SMG_Show(5,daunma[16]);
+  61   1              Delay(2);       
+  62   1              SMG_Show(6,yu/10);
+  63   1              Delay(2);
+  64   1              SMG_Show(7,yu%10);
+  65   1              Delay(2);
+  66   1      }
+  67          
+  68          void YueAdd(void)
+  69          {
+  70   1              yu++;
+  71   1              if(yu>12) 
+  72   1              {
+  73   2                      yu=1;
+  74   2              }
+  75   1              Delay(500);
+  76   1      }
+  77          
+  78          
+  79          
+  80          
+  81          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    285    ----
+   CONSTANT SIZE    =     18    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1       5
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

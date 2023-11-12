@@ -1,0 +1,194 @@
+C51 COMPILER V9.54   KEY                                                                   11/12/2023 10:23:45 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE KEY
+OBJECT MODULE PLACED IN .\Objects\key.obj
+COMPILER INVOKED BY: D:\KEIL5\keil5.1\C51\BIN\C51.EXE key.c OPTIMIZE(8,SPEED) BROWSE INCDIR(..\2.继电器与蜂鸣器) DEBUG O
+                    -BJECTEXTEND PRINT(.\Listings\key.lst) OBJECT(.\Objects\key.obj)
+
+line level    source
+
+   1          #include "key.h"
+   2          sbit S7 = P3^0;
+   3          sbit S6 = P3^1;
+   4          sbit S5 = P3^2;
+   5          sbit S4 = P3^3;
+   6          
+   7          sbit L1 = P0^0;
+   8          sbit L2 = P0^1;
+   9          sbit L3 = P0^2;
+  10          sbit L4 = P0^3;
+  11          sbit L5 = P0^4;
+  12          sbit L6 = P0^5;
+  13          void ScanKey_Alone()
+  14          {
+  15   1              if(S7==0)
+  16   1              {
+  17   2                      Delay(20);
+  18   2                      if(S7==0)
+  19   2                      {
+  20   3                              L1=0;
+  21   3                              while(S7==0);
+  22   3                              L1=1;
+  23   3                      }
+  24   2              }
+  25   1              if(S6==0)
+  26   1              {
+  27   2                      Delay(20);
+  28   2                      if(S6==0)
+  29   2                      {
+  30   3                              L2=0;
+  31   3                              while(S6==0);
+  32   3                              L2=1;
+  33   3                      }
+  34   2              }
+  35   1              if(S5==0)
+  36   1              {
+  37   2                      Delay(20);
+  38   2                      if(S5==0)
+  39   2                      {
+  40   3                              L3=0;
+  41   3                              while(S5==0);
+  42   3                              L3=1;
+  43   3                      }
+  44   2              }
+  45   1              if(S4==0)
+  46   1              {
+  47   2                      Delay(20);
+  48   2                      if(S4==0)
+  49   2                      {
+  50   3                              L4=0;
+  51   3                              while(S4==0);
+  52   3                              L4=1;
+  53   3                      }
+  54   2              }
+C51 COMPILER V9.54   KEY                                                                   11/12/2023 10:23:45 PAGE 2   
+
+  55   1      }
+  56          /***************************矩阵键盘********************************/
+  57          /*发现有按键按下， 等待其松开后， 在数码管的最左边 1 位显示相应的数字*/
+  58          unsigned char Key_Num;
+  59          void Key_Read(void)
+  60          {
+  61   1              
+  62   1              P44 = 0; P42 = 1; P35 = 1; P34 = 1; // 第 1 列
+  63   1              P30 = 1; P31 = 1; P32 = 1; P33 = 1; 
+  64   1              if(P30==0)
+  65   1              {
+  66   2                      Delay(20);
+  67   2                      if(P30==0)Key_Num = 1;
+  68   2                      while(P30==0);
+  69   2              }
+  70   1              else if(P31==0)
+  71   1              {
+  72   2                      Delay(20);
+  73   2                      if(P31==0)Key_Num =  2;
+  74   2                      while(P31==0);
+  75   2              }
+  76   1                      else if(P32==0)
+  77   1              {
+  78   2                      Delay(20);
+  79   2                      if(P32==0)Key_Num =  3;
+  80   2                      while(P32==0);
+  81   2              }
+  82   1                      else if(P33==0)
+  83   1              {
+  84   2                      Delay(20);
+  85   2                      if(P33==0) Key_Num =  4;
+  86   2                      while(P33==0);
+  87   2              }
+  88   1              P44 = 1; P42 = 0; P35 = 1; P34 = 1; // 第 2 列
+  89   1              P30 = 1; P31 = 1; P32 = 1; P33 = 1; 
+  90   1              if(P30==0)
+  91   1              {
+  92   2                      Delay(20);
+  93   2                      if(P30==0)Key_Num = 5;
+  94   2                      while(P30==0);
+  95   2              }
+  96   1              else if(P31==0)
+  97   1              {
+  98   2                      Delay(20);
+  99   2                      if(P31==0)Key_Num =  6;
+ 100   2                      while(P31==0);
+ 101   2              }
+ 102   1                      else if(P32==0)
+ 103   1              {
+ 104   2                      Delay(20);
+ 105   2                      if(P32==0)Key_Num =  7;
+ 106   2                      while(P32==0);
+ 107   2              }
+ 108   1                      else if(P33==0)
+ 109   1              {
+ 110   2                      Delay(20);
+ 111   2                      if(P33==0) Key_Num =  8;
+ 112   2                      while(P33==0);
+ 113   2              }
+ 114   1              P44 = 1; P42 = 1; P35 = 0; P34 = 1; // 第 3 列
+ 115   1              P30 = 1; P31 = 1; P32 = 1; P33 = 1; 
+ 116   1              if(P30==0)
+C51 COMPILER V9.54   KEY                                                                   11/12/2023 10:23:45 PAGE 3   
+
+ 117   1              {
+ 118   2                      Delay(20);
+ 119   2                      if(P30==0)Key_Num = 9;
+ 120   2                      while(P30==0);
+ 121   2              }
+ 122   1              else if(P31==0)
+ 123   1              {
+ 124   2                      Delay(20);
+ 125   2                      if(P31==0)Key_Num =  10;
+ 126   2                      while(P31==0);
+ 127   2              }
+ 128   1                      else if(P32==0)
+ 129   1              {
+ 130   2                      Delay(20);
+ 131   2                      if(P32==0)Key_Num =  11;
+ 132   2                      while(P32==0);
+ 133   2              }
+ 134   1                      else if(P33==0)
+ 135   1              {
+ 136   2                      Delay(20);
+ 137   2                      if(P33==0) Key_Num =  12;
+ 138   2                      while(P33==0);
+ 139   2              }
+ 140   1              P44 = 1; P42 = 1; P35 = 1; P34 = 0; // 第 4 列
+ 141   1              P30 = 1; P31 = 1; P32 = 1; P33 = 1; 
+ 142   1              if(P30==0)
+ 143   1              {
+ 144   2                      Delay(20);
+ 145   2                      if(P30==0)Key_Num = 13;
+ 146   2                      while(P30==0);
+ 147   2              }
+ 148   1              else if(P31==0)
+ 149   1              {
+ 150   2                      Delay(20);
+ 151   2                      if(P31==0)Key_Num =  14;
+ 152   2                      while(P31==0);
+ 153   2              }
+ 154   1                      else if(P32==0)
+ 155   1              {
+ 156   2                      Delay(20);
+ 157   2                      if(P32==0)Key_Num =  15;
+ 158   2                      while(P32==0);
+ 159   2              }
+ 160   1                      else if(P33==0)
+ 161   1              {
+ 162   2                      Delay(20);
+ 163   2                      if(P33==0) Key_Num =  16;
+ 164   2                      while(P33==0);
+ 165   2              }
+ 166   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    474    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

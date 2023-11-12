@@ -1,0 +1,7 @@
+".\Objects\main.obj",
+".\Objects\LED.obj",
+".\Objects\buzz.obj",
+".\Objects\sys.obj",
+".\Objects\relay.obj" 
+TO ".\Objects\test" 
+PRINT(".\Listings\test.m51") RAMSIZE(256) 

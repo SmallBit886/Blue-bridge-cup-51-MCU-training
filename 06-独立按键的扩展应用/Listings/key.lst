@@ -1,0 +1,151 @@
+C51 COMPILER V9.54   KEY                                                                   11/12/2023 10:15:58 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE KEY
+OBJECT MODULE PLACED IN .\Objects\key.obj
+COMPILER INVOKED BY: D:\KEIL5\keil5.1\C51\BIN\C51.EXE key.c OPTIMIZE(8,SPEED) BROWSE INCDIR(..\2.继电器与蜂鸣器) DEBUG O
+                    -BJECTEXTEND PRINT(.\Listings\key.lst) OBJECT(.\Objects\key.obj)
+
+line level    source
+
+   1          #include "key.h"
+   2          sbit S7 = P3^0;
+   3          sbit S6 = P3^1;
+   4          sbit S5 = P3^2;
+   5          sbit S4 = P3^3;
+   6          
+   7          sbit L1 = P0^0;
+   8          sbit L2 = P0^1;
+   9          sbit L3 = P0^2;
+  10          sbit L4 = P0^3;
+  11          sbit L5 = P0^4;
+  12          sbit L6 = P0^5;
+  13          unsigned char S7Flag;
+  14          unsigned char S6Flag;
+  15          void ScanKey_Alone(void)
+  16          {
+  17   1              if(S7==0)
+  18   1              {
+  19   2                      Delay(20);
+  20   2                      if(S7==0)
+  21   2                      {
+  22   3                              L1=0;
+  23   3                              while(S7==0);
+  24   3                              L1=1;
+  25   3                      }
+  26   2              }
+  27   1              if(S6==0)
+  28   1              {
+  29   2                      Delay(20);
+  30   2                      if(S6==0)
+  31   2                      {
+  32   3                              L2=0;
+  33   3                              while(S6==0);
+  34   3                              L2=1;
+  35   3                      }
+  36   2              }
+  37   1              if(S5==0)
+  38   1              {
+  39   2                      Delay(20);
+  40   2                      if(S5==0)
+  41   2                      {
+  42   3                              L3=0;
+  43   3                              while(S5==0);
+  44   3                              L3=1;
+  45   3                      }
+  46   2              }
+  47   1              if(S4==0)
+  48   1              {
+  49   2                      Delay(20);
+  50   2                      if(S4==0)
+  51   2                      {
+  52   3                              L4=0;
+  53   3                              while(S4==0);
+  54   3                              L4=1;
+C51 COMPILER V9.54   KEY                                                                   11/12/2023 10:15:58 PAGE 2   
+
+  55   3                      }
+  56   2              }
+  57   1      }
+  58          void Key_contron(void)
+  59          {
+  60   1              /*S7 和 S6 为选择键， 确定控制键控制那组 LED 指示灯； 
+  61   1              S5 和 S4 为控制键， 按键按下时点亮指定的 LED 指示灯， 按键松开， LED 指示灯熄灭*/
+  62   1              if(S7==0)       //检测按键7是否按下
+  63   1              {
+  64   2                      Delay(20);//消抖
+  65   2                      if(S7==0 && S6Flag==0)//如果按键7按下，并且按键6没有工作
+  66   2                      {
+  67   3                              S7Flag=1;//标志位置1：按键7工作
+  68   3                              L1=0;//点亮L1
+  69   3                              while(S7==0);//等待按键松手                             
+  70   3                      }
+  71   2                      if(S7==0 && S7Flag==1)////如果按键7按下，并且按键7工作
+  72   2                      {
+  73   3                              S7Flag=0;//标志位置0：按键7解除
+  74   3                              L1=1;//熄灭L1
+  75   3                              while(S7==0);//等待按键松手                             
+  76   3                      }
+  77   2              }
+  78   1              if(S6==0)//如果按键6按下
+  79   1              {
+  80   2                      Delay(20);//消抖
+  81   2                      if(S6==0 && S7Flag==0)//如果按键6按下，并且按键7位工作
+  82   2                      {
+  83   3                              S6Flag=1;//标志位置1：按键6工作
+  84   3                              L2=0;//L2点亮
+  85   3                              while(S6==0);//等待按键6放手                            
+  86   3                      }
+  87   2                      if(S6==0 && S6Flag==1)//如果按键6按下，并且按键6工作
+  88   2                      {
+  89   3                              S6Flag=0;//标志位置0：按键2解除
+  90   3                              L2=1;//熄灭L2
+  91   3                              while(S6==0);//等待按键松手                             
+  92   3                      }
+  93   2              }
+  94   1              
+  95   1              if(S5==0)//如果按键5按下
+  96   1              {
+  97   2                      Delay(20);//消抖
+  98   2                      if(S5==0 && S7Flag==1)//如果按键5按下，并且按键7工作
+  99   2                      {
+ 100   3                              L3=0;//点亮L3
+ 101   3                              while(S5==0);//等待按键松手                             
+ 102   3                      }
+ 103   2                      else if(S5==0 && S6Flag==1)//如果按键5按下，并且按键6工作
+ 104   2                      {
+ 105   3                              L5=0;//点亮L5
+ 106   3                              while(S5==0);//等待按键松手                             
+ 107   3                      }
+ 108   2              }
+ 109   1              if(S4==0)//如果按键4按下
+ 110   1              {
+ 111   2                      Delay(20);//消抖
+ 112   2                      if(S4==0 && S7Flag==1)//如果按键4按下，并且按键7工作
+ 113   2                      {
+ 114   3                              L4=0;//点亮L4
+ 115   3                              while(S4==0);//等待按键松手                             
+ 116   3                      }
+C51 COMPILER V9.54   KEY                                                                   11/12/2023 10:15:58 PAGE 3   
+
+ 117   2                      else if(S4==0 && S6Flag==1)//如果按键4按下，并且按键6工作
+ 118   2                      {
+ 119   3                              L6=0;//点亮L6
+ 120   3                              while(S4==0);//等待按键4松手                            
+ 121   3                      }
+ 122   2              }
+ 123   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    240    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      2    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

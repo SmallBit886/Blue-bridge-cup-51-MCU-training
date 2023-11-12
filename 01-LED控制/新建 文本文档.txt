@@ -1,0 +1,8 @@
+#include <STC15F2K60S2.H>
+
+int main()
+{
+	
+	return 0;
+
+}
