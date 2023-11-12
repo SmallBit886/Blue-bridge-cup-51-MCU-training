@@ -10,10 +10,12 @@ void SMG_Init(void)
 }
 void SMG_Show(unsigned char pos ,unsigned char date)
 {
-	Init_HC138(6);//Y6导通
-	P0=0x01<<pos;
-	Init_HC138(7);//Y7导通
-	P0=date;
+	//Init_HC138(6);//Y6导通
+	P2=~(0x00 | (0x01<<pos));
+	//Init_HC138(7);//Y7导通
+	P0=daunma[date];
+//	Delay(1);
+//	P0=0xff;
 }
 /***************************8 个数码管从左至右， 逐个数码管依次显示“0” 到“9” 的 10 个数字********************************/
 void show1(void)

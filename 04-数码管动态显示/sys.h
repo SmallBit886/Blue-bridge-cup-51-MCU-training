@@ -3,6 +3,7 @@
 #include "buzz.h"
 #include "relay.h"
 #include "SMG.h"
+#include "key.h"
 unsigned char code daunma[];
 void Delay(unsigned int ms);	
 void Init_HC138(unsigned char n);

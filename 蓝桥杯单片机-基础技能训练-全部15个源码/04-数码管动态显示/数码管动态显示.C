@@ -27,9 +27,9 @@ void SelectHC573(unsigned char channel)
 
 void DisplaySMG_Bit(unsigned char value, unsigned char pos)
 {
-	P0 = 0xff;
+	P2 = 0xff;
 	SelectHC573(6);
-	P0 = 0x01 << pos;
+	P2 = 0x01 << pos;
 	SelectHC573(7);
 	P0 = value;
 }

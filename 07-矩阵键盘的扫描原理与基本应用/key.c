@@ -59,12 +59,12 @@ unsigned char Key_Num;
 void Key_Read(void)
 {
 	
-	P44 = 0; P42 = 1; P35 = 1; P34 = 1; // 第 1 列
+	P37 = 0; P36 = 1; P35 = 1; P34 = 1; // 第 1 列
 	P30 = 1; P31 = 1; P32 = 1; P33 = 1; 
 	if(P30==0)
 	{
 		Delay(20);
-		if(P30==0)Key_Num = 1;
+		if(P30==0)Key_Num = 0;
 		while(P30==0);
 	}
 	else if(P31==0)
@@ -85,7 +85,7 @@ void Key_Read(void)
 		if(P33==0) Key_Num =  4;
 		while(P33==0);
 	}
-	P44 = 1; P42 = 0; P35 = 1; P34 = 1; // 第 2 列
+	P37 = 1; P36 = 0; P35 = 1; P34 = 1; // 第 2 列
 	P30 = 1; P31 = 1; P32 = 1; P33 = 1; 
 	if(P30==0)
 	{
@@ -111,7 +111,7 @@ void Key_Read(void)
 		if(P33==0) Key_Num =  8;
 		while(P33==0);
 	}
-	P44 = 1; P42 = 1; P35 = 0; P34 = 1; // 第 3 列
+	P37 = 1; P36 = 1; P35 = 0; P34 = 1; // 第 3 列
 	P30 = 1; P31 = 1; P32 = 1; P33 = 1; 
 	if(P30==0)
 	{
@@ -137,7 +137,7 @@ void Key_Read(void)
 		if(P33==0) Key_Num =  12;
 		while(P33==0);
 	}
-	P44 = 1; P42 = 1; P35 = 1; P34 = 0; // 第 4 列
+	P37 = 1; P36 = 1; P35 = 1; P34 = 0; // 第 4 列
 	P30 = 1; P31 = 1; P32 = 1; P33 = 1; 
 	if(P30==0)
 	{

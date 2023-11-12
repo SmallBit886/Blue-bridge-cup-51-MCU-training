@@ -10,10 +10,12 @@ void SMG_Init(void)
 }
 void SMG_Show(unsigned char pos ,unsigned char date)
 {
-	Init_HC138(6);//Y6导通
-	P0=0x01<<pos;
-	Init_HC138(7);//Y7导通
+	//Init_HC138(6);//Y6导通
+	P2=~(0x00 | (0x01<<pos));
+	//Init_HC138(7);//Y7导通
 	P0=date;
+	Delay(2);
+	P0=0xff;
 }
 /***************************8 个数码管从左至右， 逐个数码管依次显示“0” 到“9” 的 10 个数字********************************/
 void show1(void)
@@ -35,7 +37,7 @@ void show2(void)
 	
 	for(j=0;j<16;j++)
 	{
-		P0=0xff;
+		P2=0x00;
 		Delay(2);
 		P0=daunma[j];
 		Delay(500);
@@ -48,21 +50,21 @@ unsigned char yu;
 void display_show()
 {
 	SMG_Show(0,daunma[2]);
-	Delay(2);
+	//Delay(1);
 	SMG_Show(1,daunma[0]);
-	Delay(2);
+	//Delay(1);
 	SMG_Show(2,daunma[2]);
-	Delay(2); 
+	//Delay(1); 
 	SMG_Show(3,daunma[3]);
-	Delay(2); 
+	//Delay(1); 
 	SMG_Show(4,daunma[16]);
-	Delay(2); 
+	//Delay(1); 
 	SMG_Show(5,daunma[16]);
-	Delay(2);	
+	//Delay(1);	
 	SMG_Show(6,yu/10);
-	Delay(2);
+	//Delay(1);
 	SMG_Show(7,yu%10);
-	Delay(2);
+	//Delay(1);
 }
 
 void YueAdd(void)

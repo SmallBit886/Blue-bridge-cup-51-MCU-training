@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   KEY                                                                   11/12/2023 10:15:58 PAGE 1   
+C51 COMPILER V9.54   KEY                                                                   11/12/2023 19:53:36 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE KEY
@@ -62,7 +62,7 @@ line level    source
   52   3                              L4=0;
   53   3                              while(S4==0);
   54   3                              L4=1;
-C51 COMPILER V9.54   KEY                                                                   11/12/2023 10:15:58 PAGE 2   
+C51 COMPILER V9.54   KEY                                                                   11/12/2023 19:53:36 PAGE 2   
 
   55   3                      }
   56   2              }
@@ -74,7 +74,7 @@ line level    source
   62   1              if(S7==0)       //检测按键7是否按下
   63   1              {
   64   2                      Delay(20);//消抖
-  65   2                      if(S7==0 && S6Flag==0)//如果按键7按下，并且按键6没有工作
+  65   2                      if(S7==0 && S6Flag==0 && S7Flag==0)//如果按键7按下，并且按键6没有工作
   66   2                      {
   67   3                              S7Flag=1;//标志位置1：按键7工作
   68   3                              L1=0;//点亮L1
@@ -90,7 +90,7 @@ line level    source
   78   1              if(S6==0)//如果按键6按下
   79   1              {
   80   2                      Delay(20);//消抖
-  81   2                      if(S6==0 && S7Flag==0)//如果按键6按下，并且按键7位工作
+  81   2                      if(S6==0 && S7Flag==0 && S6Flag==0)//如果按键6按下，并且按键7位工作
   82   2                      {
   83   3                              S6Flag=1;//标志位置1：按键6工作
   84   3                              L2=0;//L2点亮
@@ -109,12 +109,12 @@ line level    source
   97   2                      Delay(20);//消抖
   98   2                      if(S5==0 && S7Flag==1)//如果按键5按下，并且按键7工作
   99   2                      {
- 100   3                              L3=0;//点亮L3
+ 100   3                              L3=~L3;//点亮L3
  101   3                              while(S5==0);//等待按键松手                             
  102   3                      }
  103   2                      else if(S5==0 && S6Flag==1)//如果按键5按下，并且按键6工作
  104   2                      {
- 105   3                              L5=0;//点亮L5
+ 105   3                              L5=~L5;//点亮L5
  106   3                              while(S5==0);//等待按键松手                             
  107   3                      }
  108   2              }
@@ -123,14 +123,14 @@ line level    source
  111   2                      Delay(20);//消抖
  112   2                      if(S4==0 && S7Flag==1)//如果按键4按下，并且按键7工作
  113   2                      {
- 114   3                              L4=0;//点亮L4
+ 114   3                              L4=~L4;//点亮L4
  115   3                              while(S4==0);//等待按键松手                             
  116   3                      }
-C51 COMPILER V9.54   KEY                                                                   11/12/2023 10:15:58 PAGE 3   
+C51 COMPILER V9.54   KEY                                                                   11/12/2023 19:53:36 PAGE 3   
 
  117   2                      else if(S4==0 && S6Flag==1)//如果按键4按下，并且按键6工作
  118   2                      {
- 119   3                              L6=0;//点亮L6
+ 119   3                              L6=~L6;//点亮L6
  120   3                              while(S4==0);//等待按键4松手                            
  121   3                      }
  122   2              }
@@ -138,7 +138,7 @@ line level    source
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    240    ----
+   CODE SIZE        =    248    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

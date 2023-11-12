@@ -11,7 +11,7 @@ void SMG_Init(void)
 void SMG_Show(unsigned char pos ,unsigned char date)
 {
 	Init_HC138(6);//Y6导通
-	P0=0x01<<pos;
+	P2=~(0x00 | (0x01<<pos));
 	Init_HC138(7);//Y7导通
 	P0=date;
 }
@@ -35,7 +35,7 @@ void show2(void)
 	
 	for(j=0;j<16;j++)
 	{
-		P0=0xff;
+		P2=0x00;
 		Delay(2);
 		P0=daunma[j];
 		Delay(500);
