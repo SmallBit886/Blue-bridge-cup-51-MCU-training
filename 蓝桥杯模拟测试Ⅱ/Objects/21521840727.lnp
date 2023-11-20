@@ -1,0 +1,13 @@
+".\Objects\main.obj",
+".\Objects\Timer.obj",
+".\Objects\Key.obj",
+".\Objects\SMG.obj",
+".\Objects\IIC.obj",
+".\Objects\LED.obj",
+".\Objects\sys.obj",
+".\Objects\Delay.obj",
+".\Objects\adc.obj",
+".\Objects\onewire.obj",
+".\Objects\DS18B20.obj" 
+TO ".\Objects\21521840727" 
+PRINT(".\Listings\21521840727.m51") RAMSIZE(256) 
